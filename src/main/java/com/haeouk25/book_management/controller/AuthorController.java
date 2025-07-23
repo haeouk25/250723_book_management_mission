@@ -1,0 +1,43 @@
+package com.haeouk25.book_management.controller;
+
+import com.haeouk25.book_management.model.Author;
+import com.haeouk25.book_management.repository.AuthorRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+@RequestMapping("/authors")
+@RequiredArgsConstructor
+public class AuthorController {
+    private final AuthorRepository authorRepository;
+
+    @GetMapping
+    public String list(Model model) {
+        model.addAttribute("authors", authorRepository.finalAll());
+
+        return "authors";
+    }
+
+    @GetMapping("/new")
+    public String form(Model model) {
+        model.addAttribute("author", new Author());
+
+        return "author_form";
+    }
+
+    @PostMapping
+    public String save(@ModelAttribute Author author) {
+        authorRepository.save(author);
+
+        return "redirect:/authors";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable Long id) {
+        authorRepository.delete(id);
+
+        return "redirect:/authors";
+    }
+}
