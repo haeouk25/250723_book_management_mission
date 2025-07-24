@@ -41,6 +41,13 @@ public class AuthorRepository {
         );
     }
 
+    public void update(Author author) {
+        jdbcTemplate.update(
+                "UPDATE authors SET name = ? WHERE id = ?",
+                author.getName(), author.getId()
+        );
+    }
+
     public void delete(Long id) {
         jdbcTemplate.update("DELETE FROM authors WHERE id = ?", id);
     }
