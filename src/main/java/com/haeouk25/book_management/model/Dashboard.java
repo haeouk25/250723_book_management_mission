@@ -3,14 +3,10 @@ package com.haeouk25.book_management.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
-public class Book {
-    private Long id;
-    private String title;
+public class Dashboard {
     private Long authorId;
     private String authorName;
-    private LocalDate publishedDate;
+    private Long bookCount;
 }
