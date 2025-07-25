@@ -23,7 +23,9 @@ public class BookRepository {
             book.setTitle(rs.getString("title"));
             book.setAuthorId(rs.getLong("author_id"));
             book.setAuthorName(rs.getString("author_name"));
-            book.setPublishedDate(rs.getDate("published_date").toLocalDate());
+            book.setPublishedDate(
+                    rs.getDate("published_date") != null ? rs.getDate("published_date").toLocalDate() : null
+            );
             return book;
         }
     };
